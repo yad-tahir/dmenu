@@ -38,6 +38,7 @@ struct item {
 
 static char numbers[NUMBERSBUFSIZE] = "";
 static char text[BUFSIZ] = "";
+static char originaltext[BUFSIZ] = "";
 static char *embed;
 static int bh, mw, mh;
 static int inputw = 0, promptw;
@@ -544,13 +545,25 @@ insert:
 		}
 		break;
 	case XK_Tab:
-		if (!sel)
-			return;
-		strncpy(text, sel->text, sizeof text - 1);
-		text[sizeof text - 1] = '\0';
+	  if(!sel)
+		return;
+	  if(strcmp(text, sel->text)) {
+		strncpy(originaltext, text, sizeof originaltext);
+		strncpy(text, sel->text, sizeof text);
 		cursor = strlen(text);
-		match();
-		break;
+	  } else {
+		if(sel && sel->right) {
+		  sel = sel->right;
+		  strncpy(text, sel->text, sizeof text);
+		  cursor = strlen(text);
+		}
+		else {
+		  strncpy(text, originaltext, sizeof text);
+		  cursor = strlen(text);
+		  match();
+		}
+	  }
+	  break;
 	}
 
 draw:
