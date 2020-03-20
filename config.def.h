@@ -23,4 +23,4 @@ static unsigned int lineheight = 0;         /* -h option; minimum height of a me
  * Characters not considered part of a word while deleting words
  * for example: " /?\"&[]"
  */
-static const char worddelimiters[] = " ";
+static const char worddelimiters[] = " -_";
