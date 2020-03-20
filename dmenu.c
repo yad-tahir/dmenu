@@ -766,15 +766,14 @@ main(int argc, char *argv[])
 		else if(!strcmp(argv[i], "-h")) { /* minimum height of one menu line */
 			lineheight = atoi(argv[++i]);
 			lineheight = MAX(lineheight,8); /* reasonable default in case of value too small/negative */
-		}
-		else if (!strcmp(argv[i], "-nb")) {  /* normal background color */
+		}else if (!strcmp(argv[i], "-nb")) {  /* normal background color */
 			colors[SchemeNorm][ColBg] = argv[++i];
-			colors[SchemeNormHighlight][ColFg] = colors[SchemeNorm][ColBg];
+			colors[SchemeNormHighlight][ColBg] = colors[SchemeNorm][ColBg];
 		} else if (!strcmp(argv[i], "-nf")) {  /* normal foreground color */
 			colors[SchemeNorm][ColFg] = argv[++i];
-			colors[SchemeNormHighlight][ColBg] = colors[SchemeNorm][ColFg];
 		} else if (!strcmp(argv[i], "-sb")) {  /* selected background color */
 			colors[SchemeSel][ColBg] = argv[++i];
+			colors[SchemeNormHighlight][ColFg] = colors[SchemeSel][ColBg];
 			colors[SchemeSelHighlight][ColFg] = colors[SchemeSel][ColBg];
 		} else if (!strcmp(argv[i], "-sf")){  /* selected foreground color */
 			colors[SchemeSel][ColFg] = argv[++i];
